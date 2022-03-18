@@ -14,8 +14,39 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.views.generic import TemplateView
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import routers, permissions
+
+from article.viewsets import ArticleViewSet
+from hardware.viewsets import HardwareViewSet
+
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Inventory API",
+        default_version="v1",
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
+)
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("", TemplateView.as_view(template_name="index.html"), name="index"),
+    path("admin/", admin.site.urls),
+    path("accounts/", include("account.urls")),
+    path("dashboard/", include("dashboard.urls")),
+    path(
+        "swagger/",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
 ]
+
+router = routers.DefaultRouter()
+router.register("api/hardware", HardwareViewSet, basename="hardware")
+router.register("api/article", ArticleViewSet, basename="article")
+urlpatterns += router.urls

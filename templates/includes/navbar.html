@@ -1,0 +1,29 @@
+{% load static %}
+<nav class="navbar is-primary">
+  <div class="container">
+    <div id="navMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="{% url 'index' %}">
+          Accueil
+        </a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            {% if user.is_authenticated %}
+              {% if "dashboard" in request.path %}
+                <a class="button is-primary is-light" href="{% url 'add-article' %}">Ajouter un article</a>
+                <a class="button is-warning is-light" href="{% url 'add-hardware' %}">Ajouter une référence</a>
+              {% endif %}
+              <a class="button is-info is-light" href="{% url 'list-article' %}">Dashboard</a>
+              <a class="button is-link is-light" href="{% url 'logout' %}">Se déconnecter</a>
+            {% else %}
+              <a class="button is-link is-light" href="{% url 'login' %}">S'authentifier</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
