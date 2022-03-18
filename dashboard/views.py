@@ -18,4 +18,3 @@ class DashboardView(ListView):
     def get_context_data(self, **kwargs) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         return context
-    
