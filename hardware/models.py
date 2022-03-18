@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from base.models import BaseLogModel
+from hardware.managers import HardwareManager
 
 
 class Hardware(BaseLogModel):
@@ -20,6 +21,8 @@ class Hardware(BaseLogModel):
         verbose_name=_("Numéro de série"),
         max_length=100
     )
+
+    objects = HardwareManager()
 
     def __str__(self) -> str:
         return f"{self.brand} - {self.model}"
