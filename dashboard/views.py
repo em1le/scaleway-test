@@ -1,6 +1,7 @@
 from typing import Dict, Any
 
 from django.db.models import QuerySet
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 
@@ -31,3 +32,19 @@ class CreateHardwareView(CreateView):
         "model",
         "serial_number"
     ]
+
+
+class CreateArticleView(CreateView):
+    model = Article
+    template_name = "dashboard/add-object.html"
+    success_url = reverse_lazy("list-article")
+
+    fields = [
+        "quantity",
+        "price",
+        "hardware"
+    ]
+
+    def form_valid(self, form) -> HttpResponseRedirect:
+        form.instance.user = self.request.user
+        return super().form_valid(form)
