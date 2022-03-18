@@ -3,7 +3,7 @@ from typing import Dict, Any
 from django.db.models import QuerySet
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DeleteView
 
 from article.models import Article
 from hardware.models import Hardware
@@ -36,7 +36,7 @@ class CreateHardwareView(CreateView):
 
 class CreateArticleView(CreateView):
     model = Article
-    template_name = "dashboard/add-object.html"
+    template_name = "dashboard/add.html"
     success_url = reverse_lazy("list-article")
 
     fields = [
@@ -48,3 +48,9 @@ class CreateArticleView(CreateView):
     def form_valid(self, form) -> HttpResponseRedirect:
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+class DeleteArticleView(DeleteView):
+    model = Article
+    template_name = "dashboard/delete.html"
+    success_url = reverse_lazy("list-article")

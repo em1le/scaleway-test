@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block main %}
+  <section class="hero is-fullheight-with-navbar">
+    <div class="hero-body has-centered-content">
+      <form method="post">
+        {% csrf_token %}
+        <p class="title has-text-centered">Êtes-vous certain de vouloir supprimer :</p>
+        <p class="subtitle has-text-centered">{{ object }}</p>
+        {{ form }}
+        <div class="field is-grouped is-grouped-centered">
+          <p class="control">
+            <input class="button is-danger" type="submit" value="Confirmer">
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock main %}
