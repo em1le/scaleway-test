@@ -1,0 +1,20 @@
+<article class="tile is-child notification is-5 is-primary" style="margin: 1rem !important;">
+  <p class="title">{{ article.hardware.model }}</p>
+  <p class="subtitle is-spaced">{{ article.hardware.brand }}</p>
+  <p class="subtitle is-spaced">N° de série : {{ article.hardware.serial }}</p>
+  <p class="subtitle">Quantité : {{ article.quantity }}</p>
+  <p class="subtitle">Prix unitaire : {{ article.price }}</p>
+  <p class="subtitle">Crée :<time>{{ article.created }}</time></p>
+  <div class="field is-grouped">
+    <p class="control">
+      <a class="button is-info" href="{% url 'update-article' pk=article.pk %}">
+        Modifier
+      </a>
+    </p>
+    <p class="control">
+      <a class="button is-danger" href="{% url 'delete-article' pk=article.pk %}">
+        Supprimer
+      </a>
+    </p>
+  </div>
+</article>
