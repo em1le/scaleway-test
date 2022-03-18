@@ -3,3 +3,6 @@ run:
 
 check:
 	python manage.py check
+
+test:
+	python manage.py test
