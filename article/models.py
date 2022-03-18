@@ -1,8 +1,11 @@
+from decimal import Decimal
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from base.models import BaseLogModel
+from article.managers import ArticleManager
 
 
 class Article(BaseLogModel):
@@ -29,5 +32,11 @@ class Article(BaseLogModel):
         verbose_name=_("Utilisateur")
     )
 
+    objects = ArticleManager()
+
     def __str__(self) -> str:
         return f"{self.hardware}"
+
+    @property
+    def total_price(self) -> Decimal:
+        return self.price * self.quantity
