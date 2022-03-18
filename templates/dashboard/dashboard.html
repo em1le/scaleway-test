@@ -4,9 +4,25 @@
 
 {% block main %}
   <div class="container">
+    <div class="tile is-parent mt-6 custom-tile">
+      <div class="tile is-child notification is-4 is-info is-light is-vertical">
+        <p class="subtitle is-spaced">Compte total : {{ disk_quantity }}</p>
+      </div>
+      <div class="tile is-child notification is-4 is-info is-light is-vertical">
+        <p class="subtitle is-spaced">Montant total : {{ disk_amount }}</p>
+      </div>
+    </div>
     <div class="tile is-ancestor">
       <div class="tile is-parent is-1"></div>
       <div class="tile is-parent is-10 custom-tile">
+      <article class="tile is-child notification is-5 is-info is-vertical" style="margin: 1rem !important;">
+        <p class="title">Listing hardwares</p>
+        <p class="subtitle">Hardware | Quantité | Prix </p>
+        {% for k, v in models.items %}
+          <p class="subtitle is-spaced">{{ k }} | {{ v.quantity }} | {{ v.price }}</p>
+        {% endfor %}
+      </article>
+
         {% for article in articles %}
           {% include "includes/card.html" with article=article %}
         {% endfor %}

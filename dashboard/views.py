@@ -1,4 +1,4 @@
-from typing import Dict, Any
+from typing import Dict, Any, Mapping
 
 from django.db.models import QuerySet
 from django.http import HttpResponseRedirect
@@ -18,8 +18,14 @@ class DashboardView(ListView):
     def get_queryset(self) -> QuerySet:
         return self.request.user.article_set.order_by('-created')
 
-    def get_context_data(self, **kwargs) -> Dict[str, Any]:
+    def get_context_data(self, **kwargs: Mapping) -> Dict[str, Any]:
+        """Add more context to dashboard as we want to display disks listing."""
         context = super().get_context_data(**kwargs)
+        models = set(Hardware.objects.values_list('model', flat=True))
+        context["models"] = {model: Hardware.objects.listing_by_model(model, self.request.user) for model in models}
+        inventory = Article.objects.get_inventory(user=self.request.user)
+        context["disk_quantity"] = inventory["disk_quantity"]
+        context["disk_amount"] = inventory["disk_amount"]
         return context
 
 
