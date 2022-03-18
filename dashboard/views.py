@@ -3,7 +3,7 @@ from typing import Dict, Any
 from django.db.models import QuerySet
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
 from article.models import Article
 from hardware.models import Hardware
@@ -54,3 +54,15 @@ class DeleteArticleView(DeleteView):
     model = Article
     template_name = "dashboard/delete.html"
     success_url = reverse_lazy("list-article")
+
+
+class UpdateArticleView(UpdateView):
+    model = Article
+    template_name = "dashboard/update.html"
+    success_url = reverse_lazy("list-article")
+
+    fields = [
+        "quantity",
+        "price",
+        "hardware"
+    ]
