@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from hardware.models import Hardware
+
+
+@admin.register(Hardware)
+class HardwareAdmin(admin.ModelAdmin):
+    list_display = ('brand', 'model', 'serial_number')
