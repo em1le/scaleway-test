@@ -7,20 +7,11 @@ from hardware.managers import HardwareManager
 
 class Hardware(BaseLogModel):
 
-    brand = models.CharField(
-        verbose_name=_("Marque"),
-        max_length=80
-    )
+    brand = models.CharField(verbose_name=_("Marque"), max_length=80)
 
-    model = models.CharField(
-        verbose_name=_("Modèle"),
-        max_length=80
-    )
+    model = models.CharField(verbose_name=_("Modèle"), max_length=80)
 
-    serial_number = models.CharField(
-        verbose_name=_("Numéro de série"),
-        max_length=100
-    )
+    serial_number = models.CharField(verbose_name=_("Numéro de série"), max_length=100)
 
     objects = HardwareManager()
 

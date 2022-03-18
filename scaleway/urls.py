@@ -25,21 +25,25 @@ from hardware.viewsets import HardwareViewSet
 
 
 schema_view = get_schema_view(
-   openapi.Info(
-      title="Inventory API",
-      default_version='v1',
-   ),
-   public=True,
-   permission_classes=[permissions.AllowAny],
+    openapi.Info(
+        title="Inventory API",
+        default_version="v1",
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
 )
 
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
-    path('admin/', admin.site.urls),
-    path("accounts/", include('account.urls')),
-    path("dashboard/", include('dashboard.urls')),
-    path("swagger/", schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
+    path("admin/", admin.site.urls),
+    path("accounts/", include("account.urls")),
+    path("dashboard/", include("dashboard.urls")),
+    path(
+        "swagger/",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
 ]
 
 router = routers.DefaultRouter()

@@ -7,23 +7,43 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Hardware',
+            name="Hardware",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Date de création')),
-                ('modified', models.DateTimeField(auto_now=True, verbose_name='Date de modification')),
-                ('brand', models.CharField(max_length=80, verbose_name='Marque')),
-                ('model', models.CharField(max_length=80, verbose_name='Modèle')),
-                ('serial_number', models.CharField(max_length=100, verbose_name='Numéro de série')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Date de création"
+                    ),
+                ),
+                (
+                    "modified",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="Date de modification"
+                    ),
+                ),
+                ("brand", models.CharField(max_length=80, verbose_name="Marque")),
+                ("model", models.CharField(max_length=80, verbose_name="Modèle")),
+                (
+                    "serial_number",
+                    models.CharField(max_length=100, verbose_name="Numéro de série"),
+                ),
             ],
             options={
-                'verbose_name': 'Matériel',
-                'verbose_name_plural': 'Matériels',
+                "verbose_name": "Matériel",
+                "verbose_name_plural": "Matériels",
             },
         ),
     ]

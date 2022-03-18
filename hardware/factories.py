@@ -5,10 +5,9 @@ from hardware.models import Hardware
 
 
 class HardwareFactory(DjangoModelFactory):
-
     class Meta:
         model = Hardware
 
-    brand = Faker('company')
-    model = Faker('company')
-    serial_number = Sequence(lambda n: '00000000%d' % n)
+    brand = Faker("company")
+    model = Faker("company")
+    serial_number = Sequence(lambda n: "00000000%d" % n)

@@ -3,7 +3,6 @@ from selenium.webdriver.firefox.webdriver import WebDriver
 
 
 class AccountTestCase(LiveServerTestCase):
-
     @classmethod
     def setUpClass(cls) -> None:
         cls.selenium = WebDriver()
@@ -19,7 +18,7 @@ class AccountTestCase(LiveServerTestCase):
         super().tearDownClass()
 
     def test_login(self):
-        self.selenium.get('%s%s' % (self.live_server_url, '/accounts/signup/'))
+        self.selenium.get("%s%s" % (self.live_server_url, "/accounts/signup/"))
         username_input = self.selenium.find_element(by="name", value="username")
         username_input.send_keys(self.username)
         email_input = self.selenium.find_element(by="name", value="email")

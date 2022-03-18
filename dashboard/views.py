@@ -16,13 +16,16 @@ class DashboardView(ListView):
     paginate_by = 5
 
     def get_queryset(self) -> QuerySet:
-        return self.request.user.article_set.order_by('-created')
+        return self.request.user.article_set.order_by("-created")
 
     def get_context_data(self, **kwargs: Mapping) -> Dict[str, Any]:
         """Add more context to dashboard as we want to display disks listing."""
         context = super().get_context_data(**kwargs)
-        models = set(Hardware.objects.values_list('model', flat=True))
-        context["models"] = {model: Hardware.objects.listing_by_model(model, self.request.user) for model in models}
+        models = set(Hardware.objects.values_list("model", flat=True))
+        context["models"] = {
+            model: Hardware.objects.listing_by_model(model, self.request.user)
+            for model in models
+        }
         inventory = Article.objects.get_inventory(user=self.request.user)
         context["disk_quantity"] = inventory["disk_quantity"]
         context["disk_amount"] = inventory["disk_amount"]
@@ -33,11 +36,7 @@ class CreateHardwareView(CreateView):
     model = Hardware
     template_name = "dashboard/add.html"
     success_url = reverse_lazy("list-article")
-    fields = [
-        "brand",
-        "model",
-        "serial_number"
-    ]
+    fields = ["brand", "model", "serial_number"]
 
 
 class CreateArticleView(CreateView):
@@ -45,11 +44,7 @@ class CreateArticleView(CreateView):
     template_name = "dashboard/add.html"
     success_url = reverse_lazy("list-article")
 
-    fields = [
-        "quantity",
-        "price",
-        "hardware"
-    ]
+    fields = ["quantity", "price", "hardware"]
 
     def form_valid(self, form) -> HttpResponseRedirect:
         form.instance.user = self.request.user
@@ -67,8 +62,4 @@ class UpdateArticleView(UpdateView):
     template_name = "dashboard/update.html"
     success_url = reverse_lazy("list-article")
 
-    fields = [
-        "quantity",
-        "price",
-        "hardware"
-    ]
+    fields = ["quantity", "price", "hardware"]

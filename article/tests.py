@@ -6,7 +6,6 @@ from article.models import Article
 
 
 class ArticleTestCase(TestCase):
-
     @classmethod
     def setUpTestData(cls):
         cls.user = UserFactory()

@@ -5,4 +5,4 @@ from article.models import Article
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'quantity', 'price')
+    list_display = ("pk", "quantity", "price")

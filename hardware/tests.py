@@ -5,7 +5,6 @@ from article.factories import ArticleFactory
 
 
 class HardwareTestCase(TestCase):
-
     @classmethod
     def setUpTestData(cls) -> None:
         cls.article = ArticleFactory()

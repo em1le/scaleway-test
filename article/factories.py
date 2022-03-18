@@ -10,7 +10,6 @@ from article.models import Article
 
 
 class ArticleFactory(DjangoModelFactory):
-
     class Meta:
         model = Article
 

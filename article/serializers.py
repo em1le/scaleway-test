@@ -4,7 +4,6 @@ from article.models import Article
 
 
 class ArticleSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Article
         exclude = ["user"]
