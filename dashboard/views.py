@@ -1,9 +1,11 @@
 from typing import Dict, Any
 
 from django.db.models import QuerySet
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 
 from article.models import Article
+from hardware.models import Hardware
 
 
 class DashboardView(ListView):
@@ -18,3 +20,14 @@ class DashboardView(ListView):
     def get_context_data(self, **kwargs) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         return context
+
+
+class CreateHardwareView(CreateView):
+    model = Hardware
+    template_name = "dashboard/add.html"
+    success_url = reverse_lazy("list-article")
+    fields = [
+        "brand",
+        "model",
+        "serial_number"
+    ]
