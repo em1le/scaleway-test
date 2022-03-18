@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from rest_framework import routers
+
+from article.viewsets import ArticleViewSet
+from hardware.viewsets import HardwareViewSet
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
@@ -23,3 +27,8 @@ urlpatterns = [
     path("accounts/", include('account.urls')),
     path("dashboard/", include('dashboard.urls')),
 ]
+
+router = routers.DefaultRouter()
+router.register("hardware", HardwareViewSet, basename="hardware")
+router.register("article", ArticleViewSet, basename="article")
+urlpatterns += router.urls

@@ -6,7 +6,7 @@ from hardware.models import Hardware
 from hardware.serializers import HardwareSerializer
 
 
-class EntityViewSet(viewsets.ModelViewSet):
+class HardwareViewSet(viewsets.ModelViewSet):
     serializer_class = HardwareSerializer
     permission_classes = [IsAuthenticated]
     queryset = Hardware.objects.all()
